@@ -459,7 +459,7 @@ const COLS = ['Name','Date','Time','Location','Type','Charges (₹)','Notes','Sa
 
 // ── STATE ──
 let token = null;
-let sheetId = null;
+let sheetId = localStorage.getItem('bookit_sheet_id') || null;
 let sheetOpt = 'new';
 let appts = [];
 let curMonth = new Date().getMonth();
@@ -467,31 +467,50 @@ let curYear  = new Date().getFullYear();
 let tokenClient = null;
 
 // ── GOOGLE SIGN IN ──
-function loadGIS(){
+function loadGIS(silent=false){
   const s = document.createElement('script');
   s.src = 'https://accounts.google.com/gsi/client';
   s.async = true; s.defer = true;
   s.onload = () => {
     tokenClient = google.accounts.oauth2.initTokenClient({
       client_id: CLIENT_ID, scope: SCOPES,
+      prompt: silent ? 'none' : '',
       callback: r => {
-        if(r.error){ resetLoginBtn(); showToast('Sign-in failed'); return; }
+        if(r.error){
+          if(silent){ show('screen-login'); return; }
+          resetLoginBtn(); showToast('Sign-in failed'); return;
+        }
         token = r.access_token;
-        onSignedIn();
+        // Schedule silent refresh before token expires (55 min)
+        setTimeout(() => silentRefresh(), 55 * 60 * 1000);
+        onSignedIn(silent);
       }
     });
     tokenClient.requestAccessToken();
   };
-  s.onerror = () => { resetLoginBtn(); showToast('Could not load Google sign-in'); };
+  s.onerror = () => { if(!silent){ resetLoginBtn(); showToast('Could not load Google sign-in'); } else { show('screen-login'); } };
   document.head.appendChild(s);
 }
+
+function silentRefresh(){
+  if(tokenClient){ tokenClient.requestAccessToken(); }
+  else { loadGIS(true); }
+}
+
+// Auto sign-in on page load if sheet was previously set up
+window.addEventListener('load', () => {
+  if(sheetId){
+    // Had a previous session — try silent re-auth
+    loadGIS(true);
+  }
+});
 
 function handleLogin(){
   const btn = document.getElementById('login-btn');
   btn.innerHTML = '<span class="spin"></span> Connecting...';
   btn.disabled = true;
   if(typeof google !== 'undefined' && tokenClient){ tokenClient.requestAccessToken(); }
-  else { loadGIS(); }
+  else { loadGIS(false); }
 }
 
 function resetLoginBtn(){
@@ -500,14 +519,20 @@ function resetLoginBtn(){
   btn.disabled = false;
 }
 
-async function onSignedIn(){
+async function onSignedIn(silent=false){
   try{
     const u = await api('https://www.googleapis.com/oauth2/v3/userinfo');
     document.getElementById('nav-user').textContent = u.name || u.email || '';
   }catch(e){}
   document.getElementById('top-bar').classList.add('show');
   document.getElementById('bottom-nav').classList.add('show');
-  show('screen-setup');
+  // If sheet already set up, skip setup screen
+  if(sheetId){
+    await loadAppts();
+    switchTab('form');
+  } else {
+    show('screen-setup');
+  }
 }
 
 // ── SHEET SETUP ──
@@ -525,12 +550,14 @@ async function handleSetup(){
   try{
     if(sheetOpt === 'new'){
       sheetId = await createSheet();
+      localStorage.setItem('bookit_sheet_id', sheetId);
       showToast('Sheet created ✓');
     } else {
       const raw = document.getElementById('existing-url').value.trim();
       const m = raw.match(/\/d\/([a-zA-Z0-9-_]+)/);
       sheetId = m ? m[1] : (/^[a-zA-Z0-9-_]{20,}$/.test(raw) ? raw : null);
       if(!sheetId){ showToast('Invalid Sheet URL'); btn.innerHTML='Continue →'; btn.disabled=false; return; }
+      localStorage.setItem('bookit_sheet_id', sheetId);
       await ensureHeaders();
       showToast('Sheet connected ✓');
     }
