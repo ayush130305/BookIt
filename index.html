@@ -11,200 +11,122 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
-  --pink:#C9827A;
-  --pink-light:#F5EDEC;
-  --pink-mid:#E8C5C2;
-  --dark:#1C1A1A;
-  --mid:#5A5555;
-  --muted:#9A9494;
-  --border:#E8E3E3;
-  --bg:#F9F6F6;
-  --white:#FFFFFF;
-  --green:#3E8A63;
-  --green-light:#EAF4EE;
-  --radius:14px;
-  --radius-sm:10px;
-  --bottom-nav:64px;
+  --pink:#C9827A;--pink-light:#F5EDEC;--pink-mid:#E8C5C2;
+  --dark:#1C1A1A;--mid:#5A5555;--muted:#9A9494;
+  --border:#E8E3E3;--bg:#F9F6F6;--white:#FFFFFF;
+  --green:#3E8A63;--green-light:#EAF4EE;
+  --red:#C0392B;--red-light:#FDECEA;
+  --amber:#B7740A;--amber-light:#FEF3E2;
+  --radius:14px;--radius-sm:10px;--bottom-nav:64px;
 }
 html,body{height:100%;overflow-x:hidden}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif;
-  background:var(--bg);
-  color:var(--dark);
-  font-size:16px;
-  padding-bottom:var(--bottom-nav);
-}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,sans-serif;background:var(--bg);color:var(--dark);font-size:16px;padding-bottom:var(--bottom-nav)}
 
-/* ── BOTTOM NAV ── */
-.bottom-nav{
-  position:fixed;bottom:0;left:0;right:0;
-  height:var(--bottom-nav);
-  background:var(--white);
-  border-top:1px solid var(--border);
-  display:none;
-  align-items:center;
-  justify-content:space-around;
-  z-index:200;
-  padding-bottom:env(safe-area-inset-bottom);
-}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;height:var(--bottom-nav);background:var(--white);border-top:1px solid var(--border);display:none;align-items:center;justify-content:space-around;z-index:200;padding-bottom:env(safe-area-inset-bottom)}
 .bottom-nav.show{display:flex}
-.bnav-tab{
-  display:flex;flex-direction:column;align-items:center;gap:3px;
-  padding:8px 20px;border:none;background:none;cursor:pointer;
-  color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.03em;
-  flex:1;
-}
+.bnav-tab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 14px;border:none;background:none;cursor:pointer;color:var(--muted);font-size:10px;font-weight:600;letter-spacing:.03em;flex:1}
 .bnav-tab svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .bnav-tab.active{color:var(--pink)}
 
-/* ── HEADER ── */
-.top-bar{
-  position:sticky;top:0;z-index:100;
-  background:var(--white);
-  border-bottom:1px solid var(--border);
-  padding:14px 20px 12px;
-  display:none;
-  align-items:center;
-}
+.top-bar{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:14px 20px 12px;display:none;align-items:center}
 .top-bar.show{display:flex}
 .brand{display:flex;align-items:center;gap:7px;font-weight:700;font-size:17px;color:var(--dark)}
 .brand-dot{width:9px;height:9px;border-radius:50%;background:var(--pink)}
-.top-bar-right{margin-left:auto;font-size:12px;color:var(--muted);max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.top-bar-right{margin-left:auto;display:flex;align-items:center;gap:8px}
+.nav-user-name{font-size:12px;color:var(--muted);max-width:100px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.reconnect-btn{font-size:11px;color:var(--pink);background:var(--pink-light);border:none;border-radius:20px;padding:4px 10px;cursor:pointer;font-weight:600;white-space:nowrap}
 
-/* ── SCREENS ── */
 .screen{display:none}
 .screen.active{display:block}
 
-/* ── LOGIN ── */
-.login-wrap{
-  min-height:100vh;
-  display:flex;flex-direction:column;
-  align-items:center;justify-content:center;
-  padding:32px 24px;
-  text-align:center;
-}
+/* LOGIN */
+.login-wrap{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;text-align:center}
 .login-emoji{font-size:52px;margin-bottom:20px}
 .login-wrap h1{font-size:24px;font-weight:700;line-height:1.3;margin-bottom:8px}
-.login-wrap p{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:32px;max-width:280px}
-.google-btn{
-  width:100%;max-width:340px;
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  padding:15px 20px;
-  border:1.5px solid var(--border);
-  border-radius:var(--radius);
-  background:var(--white);
-  font-size:15px;font-weight:600;color:var(--dark);
-  cursor:pointer;transition:background .15s;margin-bottom:20px;
-}
+.login-wrap .tagline{font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:8px;max-width:280px}
+.affirmation-login{font-size:13px;color:var(--pink);font-style:italic;margin-bottom:28px;max-width:260px}
+.google-btn{width:100%;max-width:340px;display:flex;align-items:center;justify-content:center;gap:10px;padding:15px 20px;border:1.5px solid var(--border);border-radius:var(--radius);background:var(--white);font-size:15px;font-weight:600;color:var(--dark);cursor:pointer;transition:background .15s;margin-bottom:20px}
 .google-btn:active{background:var(--bg)}
 .google-btn svg{width:20px;height:20px;flex-shrink:0}
-.perms-box{
-  background:var(--pink-light);border-radius:var(--radius-sm);
-  padding:16px;text-align:left;width:100%;max-width:340px;margin-bottom:16px;
-}
+.perms-box{background:var(--pink-light);border-radius:var(--radius-sm);padding:16px;text-align:left;width:100%;max-width:340px;margin-bottom:16px}
 .perms-title{font-size:10px;font-weight:700;color:var(--pink);letter-spacing:.08em;margin-bottom:10px}
 .perm-row{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--mid);margin-bottom:8px}
 .perm-row:last-child{margin-bottom:0}
 .perm-icon{font-size:16px;width:20px;text-align:center;flex-shrink:0}
 .login-note{font-size:12px;color:var(--muted);line-height:1.5;max-width:280px}
 
-/* ── PAGE WRAPPER ── */
 .page{padding:20px 20px 24px}
 
-/* ── SETUP ── */
-.setup-card{
-  background:var(--white);border:1.5px solid var(--border);
-  border-radius:var(--radius);padding:18px;margin-bottom:12px;cursor:pointer;
-  transition:border-color .15s;
-}
+/* SETUP */
+.setup-card{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:12px;cursor:pointer;transition:border-color .15s}
 .setup-card.selected{border-color:var(--pink);background:var(--pink-light)}
 .setup-card-top{display:flex;align-items:center;gap:12px;margin-bottom:6px}
-.setup-icon{
-  width:40px;height:40px;border-radius:var(--radius-sm);
-  background:var(--pink-light);display:flex;align-items:center;justify-content:center;
-  font-size:20px;flex-shrink:0;
-}
+.setup-icon{width:40px;height:40px;border-radius:var(--radius-sm);background:var(--pink-light);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
 .setup-card.selected .setup-icon{background:rgba(201,130,122,.25)}
 .setup-card h3{font-size:15px;font-weight:600}
 .setup-desc{font-size:13px;color:var(--muted);line-height:1.55;padding-left:52px}
 .existing-input{margin-top:12px;padding-left:52px;display:none}
 .existing-input.show{display:block}
+.setup-tip{font-size:12px;color:var(--muted);background:var(--bg);border-radius:var(--radius-sm);padding:10px 12px;margin-bottom:16px;line-height:1.6}
 
-/* ── FORM ── */
-.page-title{font-size:20px;font-weight:700;margin-bottom:4px}
-.page-sub{font-size:13px;color:var(--muted);margin-bottom:22px;line-height:1.5}
+/* FORM */
+.page-title{font-size:20px;font-weight:700;margin-bottom:2px}
+.page-sub{font-size:13px;color:var(--muted);margin-bottom:6px;line-height:1.5}
+.form-affirmation{font-size:13px;color:var(--pink);font-style:italic;margin-bottom:18px}
 .field{margin-bottom:16px}
-.field label{
-  display:block;font-size:11px;font-weight:700;
-  color:var(--muted);letter-spacing:.06em;margin-bottom:6px;
-}
-.field input,.field select,.field textarea{
-  width:100%;padding:13px 14px;
-  border:1.5px solid var(--border);border-radius:var(--radius-sm);
-  background:var(--white);font-size:16px;color:var(--dark);
-  font-family:inherit;-webkit-appearance:none;appearance:none;
-  transition:border-color .15s;
-}
-.field input:focus,.field select:focus,.field textarea:focus{
-  outline:none;border-color:var(--pink);
-}
+.field label{display:block;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.06em;margin-bottom:6px}
+.field input,.field select,.field textarea{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--white);font-size:16px;color:var(--dark);font-family:inherit;-webkit-appearance:none;appearance:none;transition:border-color .15s}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--pink)}
 .field select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239A9494' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
 .field textarea{resize:none;min-height:80px;font-size:15px}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 
-.reminder-box{
-  background:var(--white);border:1.5px solid var(--border);
-  border-radius:var(--radius-sm);padding:13px 14px;
-  font-size:13px;color:var(--muted);margin-bottom:20px;
-  min-height:46px;display:flex;align-items:center;flex-wrap:wrap;gap:6px;
-}
-.r-pill{
-  display:inline-flex;align-items:center;gap:4px;
-  background:var(--pink-light);color:var(--pink);
-  border-radius:20px;padding:4px 11px;font-size:12px;font-weight:600;
-}
+/* PAID TOGGLE */
+.paid-toggle{display:flex;gap:8px;margin-bottom:16px}
+.paid-opt{flex:1;padding:11px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:14px;font-weight:600;text-align:center;cursor:pointer;background:var(--white);color:var(--muted);transition:all .15s}
+.paid-opt.selected-paid{border-color:var(--green);background:var(--green-light);color:var(--green)}
+.paid-opt.selected-unpaid{border-color:var(--amber);background:var(--amber-light);color:var(--amber)}
 
-.save-btn{
-  width:100%;padding:16px;
-  background:var(--dark);color:var(--white);
-  border:none;border-radius:var(--radius);
-  font-size:16px;font-weight:700;cursor:pointer;
-  font-family:inherit;transition:opacity .15s;
-  -webkit-appearance:none;
-}
+.reminder-box{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:13px 14px;font-size:13px;color:var(--muted);margin-bottom:20px;min-height:46px;display:flex;align-items:center;flex-wrap:wrap;gap:6px}
+.r-pill{display:inline-flex;align-items:center;gap:4px;background:var(--pink-light);color:var(--pink);border-radius:20px;padding:4px 11px;font-size:12px;font-weight:600}
+.save-btn{width:100%;padding:16px;background:var(--dark);color:var(--white);border:none;border-radius:var(--radius);font-size:16px;font-weight:700;cursor:pointer;font-family:inherit;transition:opacity .15s;-webkit-appearance:none}
 .save-btn:active{opacity:.8}
 .save-btn:disabled{opacity:.4;cursor:not-allowed}
 
-/* ── DASHBOARD ── */
-.month-row{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:18px;
-}
+/* SUCCESS */
+.success-wrap{text-align:center;padding:40px 24px}
+.success-emoji{font-size:52px;margin-bottom:16px}
+.success-wrap h2{font-size:20px;font-weight:700;margin-bottom:6px}
+.success-affirmation{font-size:15px;color:var(--pink);font-style:italic;margin-bottom:24px;line-height:1.5}
+.success-details{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:left;margin-bottom:20px}
+.success-row{display:flex;gap:10px;font-size:13px;margin-bottom:8px}
+.success-row:last-child{margin-bottom:0}
+.success-label{color:var(--muted);min-width:60px}
+.success-val{color:var(--dark);font-weight:600}
+.another-btn{width:100%;padding:14px;background:var(--dark);color:var(--white);border:none;border-radius:var(--radius);font-size:15px;font-weight:700;cursor:pointer;font-family:inherit}
+
+/* ERROR */
+.error-banner{background:var(--red-light);border:1px solid rgba(192,57,43,.2);border-radius:var(--radius-sm);padding:14px 16px;margin-bottom:16px;display:none}
+.error-banner.show{display:block}
+.error-title{font-size:13px;font-weight:700;color:var(--red);margin-bottom:4px}
+.error-msg{font-size:13px;color:var(--mid);line-height:1.5;margin-bottom:8px}
+.error-action{font-size:13px;font-weight:600;color:var(--red);background:none;border:none;cursor:pointer;padding:0;text-decoration:underline}
+
+/* DASHBOARD */
+.month-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
 .month-row h2{font-size:19px;font-weight:700}
 .arrows{display:flex;gap:6px}
-.arr-btn{
-  width:36px;height:36px;
-  border:1.5px solid var(--border);border-radius:var(--radius-sm);
-  background:var(--white);cursor:pointer;
-  display:flex;align-items:center;justify-content:center;
-  font-size:17px;color:var(--mid);
-}
+.arr-btn{width:36px;height:36px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--white);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:17px;color:var(--mid)}
 .arr-btn:active{background:var(--bg)}
-
 .stats-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-.stat-card{
-  background:var(--white);border:1px solid var(--border);
-  border-radius:var(--radius);padding:16px 14px;
-}
+.stat-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px 14px}
 .stat-label{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.06em;margin-bottom:6px}
 .stat-val{font-size:22px;font-weight:800;color:var(--dark);line-height:1}
 .stat-val.green{color:var(--green)}
 .stat-sub{font-size:12px;color:var(--muted);margin-top:5px}
-
-.breakdown-card{
-  background:var(--white);border:1px solid var(--border);
-  border-radius:var(--radius);padding:16px;margin-bottom:14px;
-}
+.unpaid-banner{background:var(--amber-light);border:1px solid rgba(183,116,10,.2);border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:14px;font-size:13px;color:var(--amber);font-weight:600;display:none}
+.unpaid-banner.show{display:block}
+.breakdown-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:14px}
 .breakdown-head{font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.06em;margin-bottom:14px}
 .brow{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .brow:last-child{margin-bottom:0}
@@ -212,97 +134,135 @@ body{
 .bbar-wrap{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
 .bbar{height:100%;background:var(--pink);border-radius:3px;transition:width .4s}
 .bamt{font-size:13px;font-weight:700;color:var(--dark);min-width:72px;text-align:right}
-
 .list-title{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.06em;margin-bottom:10px}
-.appt-card{
-  background:var(--white);border:1px solid var(--border);
-  border-radius:var(--radius);padding:15px;margin-bottom:10px;
-}
+
+/* APPOINTMENT CARD */
+.appt-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:15px;margin-bottom:10px;position:relative}
+.appt-card.cancelled{opacity:.5;border-style:dashed}
+.appt-card.unpaid{border-left:3px solid var(--amber)}
 .appt-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px}
-.appt-name{font-size:15px;font-weight:700}
+.appt-name{font-size:15px;font-weight:700;cursor:pointer;color:var(--pink);text-decoration:underline;text-underline-offset:2px}
 .appt-amt{font-size:15px;font-weight:800;color:var(--green)}
 .appt-meta{font-size:12px;color:var(--muted);line-height:1.7}
-.appt-badge{
-  display:inline-block;background:var(--pink-light);color:var(--pink);
-  border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700;margin-top:7px;
-}
+.appt-badges{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:7px}
+.appt-badge{display:inline-block;background:var(--pink-light);color:var(--pink);border-radius:20px;padding:3px 10px;font-size:11px;font-weight:700}
+.badge-cancelled{background:#f0f0f0;color:var(--muted)}
+.badge-unpaid{background:var(--amber-light);color:var(--amber)}
+.badge-paid{background:var(--green-light);color:var(--green)}
+.appt-actions{display:flex;gap:6px;margin-top:10px;border-top:1px solid var(--border);padding-top:10px}
+.appt-action-btn{flex:1;padding:8px;font-size:12px;font-weight:600;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--white);cursor:pointer;color:var(--mid);font-family:inherit}
+.appt-action-btn:active{background:var(--bg)}
+.appt-action-btn.danger{color:var(--red);border-color:rgba(192,57,43,.3)}
+.appt-action-btn.success{color:var(--green);border-color:rgba(62,138,99,.3)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:500;display:none;align-items:flex-end;justify-content:center}
+.modal-overlay.show{display:flex}
+.modal{background:var(--white);border-radius:var(--radius) var(--radius) 0 0;padding:24px 20px 36px;width:100%;max-width:540px;max-height:90vh;overflow-y:auto}
+.modal-title{font-size:17px;font-weight:700;margin-bottom:4px}
+.modal-sub{font-size:13px;color:var(--muted);margin-bottom:20px}
+.modal-close{position:absolute;top:20px;right:20px;width:30px;height:30px;border-radius:50%;background:var(--bg);border:none;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;color:var(--mid)}
+.modal-btn{width:100%;padding:14px;border:none;border-radius:var(--radius);font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;margin-bottom:8px}
+.modal-btn.primary{background:var(--dark);color:var(--white)}
+.modal-btn.danger{background:var(--red-light);color:var(--red)}
+.modal-btn.secondary{background:var(--bg);color:var(--mid);border:1px solid var(--border)}
+
+/* CLIENT HISTORY */
+.client-history-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px}
+.client-name-big{font-size:18px;font-weight:700;margin-bottom:2px}
+.client-total{font-size:13px;color:var(--green);font-weight:600;margin-bottom:14px}
+.client-appt-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid var(--border);font-size:13px}
+.client-appt-row:last-child{border-bottom:none}
+.client-appt-left{color:var(--mid)}
+.client-appt-right{font-weight:700;color:var(--dark)}
 
 .empty{text-align:center;padding:44px 20px;color:var(--muted)}
 .empty-icon{font-size:38px;margin-bottom:12px}
 .empty p{font-size:13px;line-height:1.65}
 
-/* ── SHARED ── */
-.section-hdr{font-size:20px;font-weight:700;margin-bottom:4px}
-.section-sub-text{font-size:13px;color:var(--muted);margin-bottom:22px}
-
-.primary-btn{
-  width:100%;padding:15px;
-  background:var(--dark);color:var(--white);
-  border:none;border-radius:var(--radius);
-  font-size:15px;font-weight:700;cursor:pointer;
-  font-family:inherit;-webkit-appearance:none;
-  transition:opacity .15s;
-}
+.primary-btn{width:100%;padding:15px;background:var(--dark);color:var(--white);border:none;border-radius:var(--radius);font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;-webkit-appearance:none;transition:opacity .15s}
 .primary-btn:active{opacity:.8}
 .primary-btn:disabled{opacity:.4;cursor:not-allowed}
 
-/* ── TOAST ── */
-.toast{
-  position:fixed;bottom:calc(var(--bottom-nav) + 12px);left:16px;right:16px;
-  background:var(--dark);color:var(--white);
-  padding:13px 18px;border-radius:var(--radius-sm);
-  font-size:14px;font-weight:500;text-align:center;
-  transform:translateY(20px);opacity:0;
-  transition:transform .25s,opacity .25s;z-index:999;
-}
+.toast{position:fixed;bottom:calc(var(--bottom-nav) + 12px);left:16px;right:16px;background:var(--dark);color:var(--white);padding:13px 18px;border-radius:var(--radius-sm);font-size:14px;font-weight:500;text-align:center;transform:translateY(20px);opacity:0;transition:transform .25s,opacity .25s;z-index:999}
 .toast.show{transform:translateY(0);opacity:1}
-
-/* ── SPINNER ── */
-.spin{
-  display:inline-block;width:16px;height:16px;
-  border:2px solid rgba(255,255,255,.3);border-top-color:#fff;
-  border-radius:50%;animation:rot .7s linear infinite;
-  vertical-align:middle;margin-right:6px;
-}
+.spin{display:inline-block;width:16px;height:16px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:rot .7s linear infinite;vertical-align:middle;margin-right:6px}
 @keyframes rot{to{transform:rotate(360deg)}}
-
-input[type="date"]::-webkit-calendar-picker-indicator,
-input[type="time"]::-webkit-calendar-picker-indicator{opacity:.5;cursor:pointer}
-
-@media(min-width:600px){
-  .page{max-width:520px;margin:0 auto;padding:28px 24px 32px}
-  .screen-wide .page{max-width:620px}
-}
+input[type="date"]::-webkit-calendar-picker-indicator,input[type="time"]::-webkit-calendar-picker-indicator{opacity:.5;cursor:pointer}
+@media(min-width:600px){.page{max-width:520px;margin:0 auto;padding:28px 24px 32px}.screen-wide .page{max-width:620px}}
 </style>
 </head>
 <body>
 
-<!-- TOP BAR -->
 <header class="top-bar" id="top-bar">
   <div class="brand"><div class="brand-dot"></div>BookIt</div>
-  <div class="top-bar-right" id="nav-user"></div>
+  <div class="top-bar-right">
+    <div class="nav-user-name" id="nav-user"></div>
+    <button class="reconnect-btn" onclick="showReconnect()">⇄ Sheet</button>
+  </div>
 </header>
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
-<!-- ── LOGIN ── -->
+<!-- EDIT MODAL -->
+<div class="modal-overlay" id="edit-modal">
+  <div class="modal" style="position:relative">
+    <div class="modal-title">Edit appointment</div>
+    <div class="modal-sub">Changes will update your Sheet and Calendar.</div>
+    <button class="modal-close" onclick="closeModal('edit-modal')">✕</button>
+    <div class="field"><label>CLIENT NAME</label><input type="text" id="e-name"/></div>
+    <div class="field-row">
+      <div class="field"><label>DATE</label><input type="date" id="e-date"/></div>
+      <div class="field"><label>TIME</label><input type="time" id="e-time"/></div>
+    </div>
+    <div class="field"><label>LOCATION</label><input type="text" id="e-location"/></div>
+    <div class="field">
+      <label>TYPE</label>
+      <select id="e-type">
+        <option>Bridal makeup</option><option>Party makeup</option><option>Editorial / shoot</option>
+        <option>Hair styling</option><option>Trial session</option><option>Skincare / facial</option><option>Other</option>
+      </select>
+    </div>
+    <div class="field"><label>CHARGES (₹)</label><input type="number" id="e-charges" inputmode="numeric"/></div>
+    <div class="field"><label>NOTES</label><textarea id="e-notes"></textarea></div>
+    <button class="modal-btn primary" id="edit-save-btn" onclick="saveEdit()">Save changes</button>
+    <button class="modal-btn secondary" onclick="closeModal('edit-modal')">Cancel</button>
+  </div>
+</div>
+
+<!-- CANCEL CONFIRM MODAL -->
+<div class="modal-overlay" id="cancel-modal">
+  <div class="modal" style="position:relative">
+    <div class="modal-title">Cancel appointment?</div>
+    <div class="modal-sub" id="cancel-modal-sub"></div>
+    <button class="modal-close" onclick="closeModal('cancel-modal')">✕</button>
+    <p style="font-size:14px;color:var(--mid);line-height:1.6;margin-bottom:20px">This will mark the appointment as <strong>Cancelled</strong> in your Sheet and update the Calendar event. The record stays for your reference.</p>
+    <button class="modal-btn danger" id="cancel-confirm-btn" onclick="confirmCancel()">Yes, cancel it</button>
+    <button class="modal-btn secondary" onclick="closeModal('cancel-modal')">Keep appointment</button>
+  </div>
+</div>
+
+<!-- CLIENT HISTORY MODAL -->
+<div class="modal-overlay" id="history-modal">
+  <div class="modal" style="position:relative">
+    <div class="modal-title" id="history-modal-title">Client history</div>
+    <div class="modal-sub" id="history-modal-sub"></div>
+    <button class="modal-close" onclick="closeModal('history-modal')">✕</button>
+    <div id="history-modal-content"></div>
+  </div>
+</div>
+
+<!-- LOGIN -->
 <div class="screen active" id="screen-login">
   <div class="login-wrap">
     <div class="login-emoji">💄</div>
     <h1>Your bookings,<br>beautifully organised.</h1>
-    <p>Log appointments to Google Sheets & Calendar — with auto reminders and monthly income tracking.</p>
-
+    <p class="tagline">Log appointments to Google Sheets & Calendar — with auto reminders and monthly income tracking.</p>
+    <p class="affirmation-login" id="login-affirmation"></p>
     <button class="google-btn" onclick="handleLogin()" id="login-btn">
-      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-      </svg>
+      <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
       Sign in with Google
     </button>
-
     <div class="perms-box">
       <div class="perms-title">PERMISSIONS NEEDED</div>
       <div class="perm-row"><span class="perm-icon">📊</span> Write to Google Sheets</div>
@@ -313,99 +273,82 @@ input[type="time"]::-webkit-calendar-picker-indicator{opacity:.5;cursor:pointer}
   </div>
 </div>
 
-<!-- ── SETUP ── -->
+<!-- SETUP -->
 <div class="screen" id="screen-setup">
   <div class="page">
-    <div class="section-hdr">Connect your Sheet</div>
-    <div class="section-sub-text">Where should appointments be saved?</div>
-
+    <div class="page-title" id="setup-title">Connect your Sheet</div>
+    <div class="page-sub" style="margin-bottom:16px">Where should appointments be saved?</div>
+    <div class="setup-tip"><strong>Using multiple devices?</strong> Create once, then paste the same Sheet URL on every other device. All bookings stay in one place. 📋</div>
     <div class="setup-card selected" id="card-new" onclick="selectSheet('new')">
-      <div class="setup-card-top">
-        <div class="setup-icon">✨</div>
-        <h3>Create a fresh sheet</h3>
-      </div>
-      <p class="setup-desc">We'll create a new "BookIt Appointments" Google Sheet with the right columns, ready to go.</p>
+      <div class="setup-card-top"><div class="setup-icon">✨</div><h3>Create a fresh sheet</h3></div>
+      <p class="setup-desc">We'll create a new "BookIt Appointments" Google Sheet in your Drive, ready to go.</p>
     </div>
-
     <div class="setup-card" id="card-existing" onclick="selectSheet('existing')">
-      <div class="setup-card-top">
-        <div class="setup-icon">📋</div>
-        <h3>Use an existing sheet</h3>
-      </div>
-      <p class="setup-desc">Already have a sheet? Paste its URL below and we'll add rows to it.</p>
+      <div class="setup-card-top"><div class="setup-icon">📋</div><h3>Connect existing sheet</h3></div>
+      <p class="setup-desc">Already have a BookIt sheet? Paste its URL to reconnect on this device.</p>
       <div class="existing-input" id="existing-wrap">
         <div class="field" style="margin-bottom:0;margin-top:10px">
           <label>GOOGLE SHEET URL</label>
-          <input type="url" id="existing-url" placeholder="https://docs.google.com/spreadsheets/d/..." inputmode="url" />
+          <input type="url" id="existing-url" placeholder="https://docs.google.com/spreadsheets/d/..." inputmode="url"/>
         </div>
       </div>
     </div>
-
     <button class="primary-btn" id="setup-btn" onclick="handleSetup()">Continue →</button>
   </div>
 </div>
 
-<!-- ── BOOKING FORM ── -->
+<!-- FORM -->
 <div class="screen" id="screen-form">
   <div class="page">
     <div class="page-title">New appointment</div>
     <div class="page-sub">Saves to your Sheet & Calendar automatically.</div>
-
-    <div class="field">
-      <label>CLIENT NAME</label>
-      <input type="text" id="f-name" placeholder="e.g. Priya Sharma" autocomplete="off" />
+    <div class="form-affirmation" id="form-affirmation"></div>
+    <div class="error-banner" id="form-error">
+      <div class="error-title" id="form-error-title">Something went wrong</div>
+      <div class="error-msg" id="form-error-msg"></div>
+      <button class="error-action" id="form-error-action" onclick="handleErrorAction()"></button>
     </div>
-
+    <div class="field"><label>CLIENT NAME</label><input type="text" id="f-name" placeholder="e.g. Priya Sharma" autocomplete="off"/></div>
     <div class="field-row">
-      <div class="field">
-        <label>DATE</label>
-        <input type="date" id="f-date" onchange="updateReminder()" />
-      </div>
-      <div class="field">
-        <label>TIME</label>
-        <input type="time" id="f-time" />
-      </div>
+      <div class="field"><label>DATE</label><input type="date" id="f-date" onchange="updateReminder()"/></div>
+      <div class="field"><label>TIME</label><input type="time" id="f-time"/></div>
     </div>
-
-    <div class="field">
-      <label>LOCATION</label>
-      <input type="text" id="f-location" placeholder="Address or studio" autocomplete="off" />
-    </div>
-
+    <div class="field"><label>LOCATION</label><input type="text" id="f-location" placeholder="Address or studio" autocomplete="off"/></div>
     <div class="field">
       <label>TYPE OF APPOINTMENT</label>
       <select id="f-type">
         <option value="">Select...</option>
-        <option>Bridal makeup</option>
-        <option>Party makeup</option>
-        <option>Editorial / shoot</option>
-        <option>Hair styling</option>
-        <option>Trial session</option>
-        <option>Skincare / facial</option>
-        <option>Other</option>
+        <option>Bridal makeup</option><option>Party makeup</option><option>Editorial / shoot</option>
+        <option>Hair styling</option><option>Trial session</option><option>Skincare / facial</option><option>Other</option>
       </select>
     </div>
-
+    <div class="field"><label>CHARGES (₹)</label><input type="number" id="f-charges" placeholder="5000" min="0" inputmode="numeric"/></div>
+    <div class="field"><label>NOTES (optional)</label><textarea id="f-notes" placeholder="Look preferences, skin type, products to bring..."></textarea></div>
     <div class="field">
-      <label>CHARGES (₹)</label>
-      <input type="number" id="f-charges" placeholder="5000" min="0" inputmode="numeric" />
+      <label>PAYMENT STATUS</label>
+      <div class="paid-toggle">
+        <div class="paid-opt selected-paid" id="opt-paid" onclick="setPaid(true)">✓ Paid</div>
+        <div class="paid-opt" id="opt-unpaid" onclick="setPaid(false)">⏳ Unpaid</div>
+      </div>
     </div>
-
-    <div class="field">
-      <label>NOTES (optional)</label>
-      <textarea id="f-notes" placeholder="Look preferences, skin type, products to bring..."></textarea>
-    </div>
-
     <div style="font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.06em;margin-bottom:7px">REMINDERS</div>
-    <div class="reminder-box" id="reminder-box">
-      <span style="color:var(--muted)">Enter a date to see reminders</span>
-    </div>
-
+    <div class="reminder-box" id="reminder-box"><span style="color:var(--muted)">Enter a date to see reminders</span></div>
     <button class="save-btn" id="save-btn" onclick="handleSave()">Save appointment</button>
   </div>
 </div>
 
-<!-- ── INCOME DASHBOARD ── -->
+<!-- SUCCESS -->
+<div class="screen" id="screen-success">
+  <div class="success-wrap">
+    <div class="success-emoji">🌟</div>
+    <h2>Booking saved!</h2>
+    <p class="success-affirmation" id="success-affirmation"></p>
+    <div class="success-details" id="success-details"></div>
+    <button class="another-btn" onclick="showForm()">+ Add another</button>
+  </div>
+</div>
+
+<!-- DASHBOARD -->
 <div class="screen screen-wide" id="screen-dashboard">
   <div class="page">
     <div class="month-row">
@@ -415,364 +358,429 @@ input[type="time"]::-webkit-calendar-picker-indicator{opacity:.5;cursor:pointer}
         <button class="arr-btn" onclick="changeMonth(1)">&#8594;</button>
       </div>
     </div>
-
     <div class="stats-grid">
-      <div class="stat-card">
-        <div class="stat-label">THIS MONTH</div>
-        <div class="stat-val green" id="stat-month">₹0</div>
-        <div class="stat-sub" id="stat-month-sub">0 appointments</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-label">YEAR TO DATE</div>
-        <div class="stat-val" id="stat-ytd">₹0</div>
-        <div class="stat-sub" id="stat-ytd-sub">2026 total</div>
-      </div>
+      <div class="stat-card"><div class="stat-label">THIS MONTH</div><div class="stat-val green" id="stat-month">₹0</div><div class="stat-sub" id="stat-month-sub">0 appointments</div></div>
+      <div class="stat-card"><div class="stat-label">YEAR TO DATE</div><div class="stat-val" id="stat-ytd">₹0</div><div class="stat-sub" id="stat-ytd-sub">2026 total</div></div>
     </div>
-
-    <div class="breakdown-card">
-      <div class="breakdown-head">BY APPOINTMENT TYPE</div>
-      <div id="breakdown"></div>
-    </div>
-
+    <div class="unpaid-banner" id="unpaid-banner"></div>
+    <div class="breakdown-card"><div class="breakdown-head">BY APPOINTMENT TYPE</div><div id="breakdown"></div></div>
     <div class="list-title" id="list-title">APPOINTMENTS</div>
     <div id="appt-list"></div>
   </div>
 </div>
 
-<!-- ── BOTTOM NAV ── -->
 <nav class="bottom-nav" id="bottom-nav">
   <button class="bnav-tab active" id="tab-book" onclick="switchTab('form')">
-    <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-    Book
+    <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Book
   </button>
   <button class="bnav-tab" id="tab-income" onclick="switchTab('dashboard')">
-    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17h7M17.5 14v7"/></svg>
-    Income
+    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 17h7M17.5 14v7"/></svg>Income
   </button>
 </nav>
 
 <script>
-// ── CONFIG ──
-const CLIENT_ID = '769663053484-7duueidupqs3l36c70bddrc0av2s52tb.apps.googleusercontent.com';
-const SCOPES = 'https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/userinfo.profile';
-const COLS = ['Name','Date','Time','Location','Type','Charges (₹)','Notes','Saved At'];
+const CLIENT_ID='769663053484-7duueidupqs3l36c70bddrc0av2s52tb.apps.googleusercontent.com';
+const SCOPES='https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/userinfo.profile';
+const COLS=['Name','Date','Time','Location','Type','Charges (₹)','Notes','Saved At','Paid','Status','Calendar Event ID'];
 
-// ── STATE ──
-let token = null;
-let sheetId = localStorage.getItem('bookit_sheet_id') || null;
-let sheetOpt = 'new';
-let appts = [];
-let curMonth = new Date().getMonth();
-let curYear  = new Date().getFullYear();
-let tokenClient = null;
-let gisLoaded = false;
+const AFFIRMATIONS=["You're literally booked and blessed. 💅","Another day, another glow-up. You're unstoppable.","The brushes don't lie — you're that girl.","Clients come back because nobody does it like you.","You didn't choose the glam life, the glam life chose you.","Every face you touch becomes a masterpiece.","Honestly? Your highlight game could blind the sun.","Building an empire one contour at a time.","Your kit bag is basically a magic wand.","They book you weeks in advance because you're worth the wait.","Running your own business AND looking this good? Iconic.","You're not just a makeup artist, you're a whole vibe.","That client's going to walk out feeling like a film star. Because of you."];
+const SUCCESS_AFFIRMATIONS=["Sealed, saved, and absolutely slaying. 💄","Another one locked in. The empire grows.","Calendar's looking bushy. Just like your clients' brows. 😌","Booked. Blessed. Unbothered.","Your Google Sheet is the only spreadsheet that sparks joy.","That client has no idea how lucky they are.","One more step toward world domination. Carry on.","Reminder set. Bag secured. You're winning."];
+const rand=arr=>arr[Math.floor(Math.random()*arr.length)];
 
-// ── BOOT: load GIS immediately on every page load ──
-// Google remembers consent — if she's signed in before, this resolves
-// invisibly in <1 second and takes her straight into the app.
+let token=null,sheetId=localStorage.getItem('bookit_sheet_id')||null;
+let sheetOpt='new',appts=[],curMonth=new Date().getMonth(),curYear=new Date().getFullYear();
+let tokenClient=null,gisLoaded=false,lastSaved=null,errorContext=null;
+let isPaid=true,editingIdx=null,cancellingIdx=null;
+
+// ── BOOT ──
 (function boot(){
-  const s = document.createElement('script');
-  s.src = 'https://accounts.google.com/gsi/client';
-  s.async = true; s.defer = true;
-  s.onload = () => {
-    gisLoaded = true;
-    tokenClient = google.accounts.oauth2.initTokenClient({
-      client_id: CLIENT_ID,
-      scope: SCOPES,
-      callback: onTokenResponse
-    });
-    // Always attempt auto sign-in on load.
-    // If she's granted consent before, Google resolves this silently.
-    // If not (first ever visit), nothing happens — she sees the login screen.
-    tokenClient.requestAccessToken({ prompt: '' });
+  document.getElementById('login-affirmation').textContent=rand(AFFIRMATIONS);
+  const s=document.createElement('script');
+  s.src='https://accounts.google.com/gsi/client';
+  s.async=true;s.defer=true;
+  s.onload=()=>{
+    gisLoaded=true;
+    tokenClient=google.accounts.oauth2.initTokenClient({client_id:CLIENT_ID,scope:SCOPES,callback:onTokenResponse});
+    tokenClient.requestAccessToken({prompt:''});
   };
-  s.onerror = () => { /* GIS failed to load — user stays on login screen */ };
   document.head.appendChild(s);
 })();
 
 function onTokenResponse(r){
-  if(r.error){
-    // Not signed in or consent not given yet — show login screen normally
-    resetLoginBtn();
-    show('screen-login');
-    return;
-  }
-  token = r.access_token;
-  // Refresh token 5 min before expiry (tokens last 1hr)
-  setTimeout(refreshToken, 55 * 60 * 1000);
+  if(r.error){resetLoginBtn();show('screen-login');return;}
+  token=r.access_token;
+  setTimeout(refreshToken,55*60*1000);
   onSignedIn();
 }
-
-function refreshToken(){
-  // Silent refresh — no prompt, no UI
-  if(tokenClient){
-    tokenClient.requestAccessToken({ prompt: '' });
-  }
-}
+function refreshToken(){if(tokenClient)tokenClient.requestAccessToken({prompt:''});}
 
 function handleLogin(){
-  const btn = document.getElementById('login-btn');
-  btn.innerHTML = '<span class="spin"></span> Connecting...';
-  btn.disabled = true;
-  if(gisLoaded && tokenClient){
-    // Explicitly ask for consent prompt since user clicked the button
-    tokenClient.requestAccessToken({ prompt: 'select_account' });
-  } else {
-    // GIS still loading — wait briefly and retry
-    setTimeout(() => {
-      if(gisLoaded && tokenClient){ tokenClient.requestAccessToken({ prompt: 'select_account' }); }
-      else { resetLoginBtn(); showToast('Could not connect to Google. Try again.'); }
-    }, 2000);
-  }
+  const btn=document.getElementById('login-btn');
+  btn.innerHTML='<span class="spin"></span> Connecting...';btn.disabled=true;
+  if(gisLoaded&&tokenClient)tokenClient.requestAccessToken({prompt:'select_account'});
+  else setTimeout(()=>{if(gisLoaded&&tokenClient)tokenClient.requestAccessToken({prompt:'select_account'});else{resetLoginBtn();showToast('Could not connect. Try again.');}},2000);
 }
-
 function resetLoginBtn(){
-  const btn = document.getElementById('login-btn');
-  btn.innerHTML = `<svg viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Sign in with Google`;
-  btn.disabled = false;
+  document.getElementById('login-btn').innerHTML=`<svg viewBox="0 0 24 24" width="20" height="20"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Sign in with Google`;
+  document.getElementById('login-btn').disabled=false;
 }
 
 async function onSignedIn(){
-  try{
-    const u = await api('https://www.googleapis.com/oauth2/v3/userinfo');
-    document.getElementById('nav-user').textContent = u.name || u.email || '';
-  }catch(e){}
+  try{const u=await api('https://www.googleapis.com/oauth2/v3/userinfo');document.getElementById('nav-user').textContent=u.name||u.email||'';}catch(e){}
   document.getElementById('top-bar').classList.add('show');
   document.getElementById('bottom-nav').classList.add('show');
-  if(sheetId){
-    await loadAppts();
-    switchTab('form');
-  } else {
-    show('screen-setup');
-  }
+  if(sheetId){await loadAppts();switchTab('form');}
+  else show('screen-setup');
 }
 
-// ── SHEET SETUP ──
+// ── SETUP ──
 function selectSheet(opt){
-  sheetOpt = opt;
-  document.getElementById('card-new').classList.toggle('selected', opt==='new');
-  document.getElementById('card-existing').classList.toggle('selected', opt==='existing');
-  document.getElementById('existing-wrap').classList.toggle('show', opt==='existing');
+  sheetOpt=opt;
+  document.getElementById('card-new').classList.toggle('selected',opt==='new');
+  document.getElementById('card-existing').classList.toggle('selected',opt==='existing');
+  document.getElementById('existing-wrap').classList.toggle('show',opt==='existing');
 }
-
+function showReconnect(){
+  document.getElementById('setup-title').textContent='Reconnect your Sheet';
+  localStorage.removeItem('bookit_sheet_id');sheetId=null;show('screen-setup');
+}
 async function handleSetup(){
-  const btn = document.getElementById('setup-btn');
-  btn.innerHTML = '<span class="spin"></span> Setting up...';
-  btn.disabled = true;
+  const btn=document.getElementById('setup-btn');
+  btn.innerHTML='<span class="spin"></span> Setting up...';btn.disabled=true;
   try{
-    if(sheetOpt === 'new'){
-      sheetId = await createSheet();
-      localStorage.setItem('bookit_sheet_id', sheetId);
-      showToast('Sheet created ✓');
-    } else {
-      const raw = document.getElementById('existing-url').value.trim();
-      const m = raw.match(/\/d\/([a-zA-Z0-9-_]+)/);
-      sheetId = m ? m[1] : (/^[a-zA-Z0-9-_]{20,}$/.test(raw) ? raw : null);
-      if(!sheetId){ showToast('Invalid Sheet URL'); btn.innerHTML='Continue →'; btn.disabled=false; return; }
-      localStorage.setItem('bookit_sheet_id', sheetId);
-      await ensureHeaders();
-      showToast('Sheet connected ✓');
+    if(sheetOpt==='new'){sheetId=await createSheet();localStorage.setItem('bookit_sheet_id',sheetId);showToast('Sheet created ✓');}
+    else{
+      const raw=document.getElementById('existing-url').value.trim();
+      const m=raw.match(/\/d\/([a-zA-Z0-9-_]+)/);
+      sheetId=m?m[1]:(/^[a-zA-Z0-9-_]{20,}$/.test(raw)?raw:null);
+      if(!sheetId){showToast('Paste the full Google Sheet URL');btn.innerHTML='Continue →';btn.disabled=false;return;}
+      localStorage.setItem('bookit_sheet_id',sheetId);
+      await ensureHeaders();showToast('Sheet connected ✓');
     }
-    await loadAppts();
-    switchTab('form');
-  }catch(e){
-    showToast('Error: '+(e.message||'Setup failed'));
-    btn.innerHTML='Continue →'; btn.disabled=false;
-  }
+    await loadAppts();switchTab('form');
+  }catch(e){showToast('Error: '+(e.message||'Try again'));btn.innerHTML='Continue →';btn.disabled=false;}
 }
-
 async function createSheet(){
-  const res = await api('https://sheets.googleapis.com/v4/spreadsheets','POST',{properties:{title:'BookIt — Appointments'}});
-  const id = res.spreadsheetId;
-  await api(`https://sheets.googleapis.com/v4/spreadsheets/${id}/values/Sheet1!A1:H1?valueInputOption=RAW`,'PUT',{values:[COLS]});
+  const res=await api('https://sheets.googleapis.com/v4/spreadsheets','POST',{properties:{title:'BookIt — Appointments'}});
+  const id=res.spreadsheetId;
+  await api(`https://sheets.googleapis.com/v4/spreadsheets/${id}/values/Sheet1!A1:K1?valueInputOption=RAW`,'PUT',{values:[COLS]});
   await api(`https://sheets.googleapis.com/v4/spreadsheets/${id}:batchUpdate`,'POST',{requests:[{repeatCell:{range:{sheetId:0,startRowIndex:0,endRowIndex:1},cell:{userEnteredFormat:{backgroundColor:{red:.788,green:.510,blue:.478},textFormat:{foregroundColor:{red:1,green:1,blue:1},bold:true}}},fields:'userEnteredFormat(backgroundColor,textFormat)'}}]});
   return id;
 }
-
 async function ensureHeaders(){
-  const r = await api(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!A1:H1`);
-  if(!r.values||!r.values[0]||r.values[0].length===0){
-    await api(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!A1:H1?valueInputOption=RAW`,'PUT',{values:[COLS]});
-  }
+  const r=await api(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!A1:K1`);
+  if(!r.values||!r.values[0]||r.values[0].length===0)await api(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!A1:K1?valueInputOption=RAW`,'PUT',{values:[COLS]});
+}
+
+// ── PAID TOGGLE ──
+function setPaid(paid){
+  isPaid=paid;
+  document.getElementById('opt-paid').className='paid-opt'+(paid?' selected-paid':'');
+  document.getElementById('opt-unpaid').className='paid-opt'+(!paid?' selected-unpaid':'');
 }
 
 // ── REMINDERS ──
 function getReminderMins(dateVal){
-  const today = new Date(); today.setHours(0,0,0,0);
-  const appt = new Date(dateVal+'T00:00:00');
-  const diff = Math.round((appt-today)/86400000);
-  if(diff<=0) return [];
-  return diff<=3 ? [24*60] : [3*24*60, 24*60];
+  const today=new Date();today.setHours(0,0,0,0);
+  const appt=new Date(dateVal+'T00:00:00');
+  const diff=Math.round((appt-today)/86400000);
+  if(diff<=0)return[];
+  return diff<=3?[24*60]:[3*24*60,24*60];
 }
-
 function updateReminder(){
-  const v = document.getElementById('f-date').value;
-  const box = document.getElementById('reminder-box');
-  if(!v){ box.innerHTML='<span style="color:var(--muted)">Enter a date to see reminders</span>'; return; }
-  const mins = getReminderMins(v);
-  if(!mins.length){ box.innerHTML='<span style="color:var(--muted)">Date is today or past — no reminders</span>'; return; }
-  const labels = mins.map(m => `<span class="r-pill">🔔 ${m===60*24?'1 day':'3 days'} before</span>`);
-  box.innerHTML = labels.join('');
+  const v=document.getElementById('f-date').value;
+  const box=document.getElementById('reminder-box');
+  if(!v){box.innerHTML='<span style="color:var(--muted)">Enter a date to see reminders</span>';return;}
+  const mins=getReminderMins(v);
+  if(!mins.length){box.innerHTML='<span style="color:var(--muted)">Date is today or past — no reminders set</span>';return;}
+  box.innerHTML=mins.map(m=>`<span class="r-pill">🔔 ${m===60*24?'1 day':'3 days'} before</span>`).join('');
 }
 
 // ── SAVE ──
+function showForm(){
+  document.getElementById('form-affirmation').textContent=rand(AFFIRMATIONS);
+  hideError();show('screen-form');
+}
 async function handleSave(){
-  const n  = document.getElementById('f-name').value.trim();
-  const d  = document.getElementById('f-date').value;
-  const t  = document.getElementById('f-time').value;
-  const lo = document.getElementById('f-location').value.trim();
-  const ty = document.getElementById('f-type').value;
-  const ch = document.getElementById('f-charges').value;
-  const no = document.getElementById('f-notes').value.trim();
-
-  if(!n||!d||!t||!lo||!ty||!ch){ showToast('Please fill in all fields'); return; }
-
-  const btn = document.getElementById('save-btn');
-  btn.innerHTML='<span class="spin"></span> Saving...'; btn.disabled=true;
-
+  const n=document.getElementById('f-name').value.trim();
+  const d=document.getElementById('f-date').value;
+  const t=document.getElementById('f-time').value;
+  const lo=document.getElementById('f-location').value.trim();
+  const ty=document.getElementById('f-type').value;
+  const ch=document.getElementById('f-charges').value;
+  const no=document.getElementById('f-notes').value.trim();
+  if(!n||!d||!t||!lo||!ty||!ch){showToast('Please fill in all fields');return;}
+  const btn=document.getElementById('save-btn');
+  btn.innerHTML='<span class="spin"></span> Saving...';btn.disabled=true;hideError();
   try{
-    // Sheet row
-    const saved = new Date().toLocaleString('en-IN');
-    await api(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!A:H:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`,'POST',{values:[[n,d,t,lo,ty,ch,no,saved]]});
-
-    // Calendar event
-    const [hh,mm] = t.split(':');
-    const endH = String((+hh+1)%24).padStart(2,'0');
-    const reminderMins = getReminderMins(d);
-    await api('https://www.googleapis.com/calendar/v3/calendars/primary/events','POST',{
-      summary:`💄 ${n} — ${ty}`,
-      location:lo,
-      description:`Charges: ₹${parseInt(ch).toLocaleString('en-IN')}\n${no}`,
+    const saved=new Date().toLocaleString('en-IN');
+    const[hh,mm]=t.split(':');
+    const endH=String((+hh+1)%24).padStart(2,'0');
+    const reminderMins=getReminderMins(d);
+    // Create calendar event first to get event ID
+    const calEvent=await api('https://www.googleapis.com/calendar/v3/calendars/primary/events','POST',{
+      summary:`💄 ${n} — ${ty}`,location:lo,
+      description:`Charges: ₹${parseInt(ch).toLocaleString('en-IN')}\nStatus: ${isPaid?'Paid':'Unpaid'}\n${no}`,
       start:{dateTime:`${d}T${t}:00`,timeZone:'Asia/Kolkata'},
       end:{dateTime:`${d}T${endH}:${mm}:00`,timeZone:'Asia/Kolkata'},
-      reminders:{useDefault:false, overrides:reminderMins.map(m=>({method:'popup',minutes:m}))}
+      reminders:{useDefault:false,overrides:reminderMins.map(m=>({method:'popup',minutes:m}))}
     });
-
-    appts.push({name:n,date:d,time:t,location:lo,type:ty,charges:+ch,notes:no});
-
-    // Reset
+    const calEventId=calEvent.id||'';
+    await api(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!A:K:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`,'POST',{values:[[n,d,t,lo,ty,ch,no,saved,isPaid?'Paid':'Unpaid','Active',calEventId]]});
+    lastSaved={name:n,date:d,time:t,location:lo,type:ty,charges:+ch,paid:isPaid};
+    appts.push({name:n,date:d,time:t,location:lo,type:ty,charges:+ch,notes:no,paid:isPaid,status:'Active',calEventId,rowIndex:appts.length+2});
     ['f-name','f-location','f-notes'].forEach(id=>document.getElementById(id).value='');
-    ['f-type'].forEach(id=>document.getElementById(id).value='');
-    document.getElementById('f-charges').value='';
-    document.getElementById('f-date').value='';
-    document.getElementById('f-time').value='';
+    document.getElementById('f-type').value='';document.getElementById('f-charges').value='';
+    document.getElementById('f-date').value='';document.getElementById('f-time').value='';
     document.getElementById('reminder-box').innerHTML='<span style="color:var(--muted)">Enter a date to see reminders</span>';
+    setPaid(true);
+    showSuccessScreen();
+  }catch(e){handleSaveError(e);}
+  btn.innerHTML='Save appointment';btn.disabled=false;
+}
 
-    showToast('✓ Saved to Sheet & Calendar');
-  }catch(e){
-    showToast('Error: '+(e.message||'Save failed'));
-  }
-  btn.innerHTML='Save appointment'; btn.disabled=false;
+// ── EDIT ──
+function openEdit(idx){
+  editingIdx=idx;
+  const a=appts[idx];
+  document.getElementById('e-name').value=a.name;
+  document.getElementById('e-date').value=a.date;
+  document.getElementById('e-time').value=a.time;
+  document.getElementById('e-location').value=a.location;
+  document.getElementById('e-type').value=a.type;
+  document.getElementById('e-charges').value=a.charges;
+  document.getElementById('e-notes').value=a.notes||'';
+  document.getElementById('edit-modal').classList.add('show');
+}
+async function saveEdit(){
+  const btn=document.getElementById('edit-save-btn');
+  btn.innerHTML='<span class="spin"></span> Saving...';btn.disabled=true;
+  const a=appts[editingIdx];
+  const n=document.getElementById('e-name').value.trim();
+  const d=document.getElementById('e-date').value;
+  const t=document.getElementById('e-time').value;
+  const lo=document.getElementById('e-location').value.trim();
+  const ty=document.getElementById('e-type').value;
+  const ch=document.getElementById('e-charges').value;
+  const no=document.getElementById('e-notes').value.trim();
+  try{
+    // Update sheet row
+    const row=a.rowIndex;
+    await api(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!A${row}:K${row}?valueInputOption=RAW`,'PUT',{values:[[n,d,t,lo,ty,ch,no,a.savedAt||'',a.paid?'Paid':'Unpaid',a.status||'Active',a.calEventId||'']]});
+    // Update calendar event if we have event ID
+    if(a.calEventId){
+      const[hh,mm]=t.split(':');
+      const endH=String((+hh+1)%24).padStart(2,'0');
+      await api(`https://www.googleapis.com/calendar/v3/calendars/primary/events/${a.calEventId}`,'PUT',{
+        summary:`💄 ${n} — ${ty}`,location:lo,
+        description:`Charges: ₹${parseInt(ch).toLocaleString('en-IN')}\n${no}`,
+        start:{dateTime:`${d}T${t}:00`,timeZone:'Asia/Kolkata'},
+        end:{dateTime:`${d}T${endH}:${mm}:00`,timeZone:'Asia/Kolkata'},
+        reminders:{useDefault:false,overrides:getReminderMins(d).map(m=>({method:'popup',minutes:m}))}
+      });
+    }
+    appts[editingIdx]={...a,name:n,date:d,time:t,location:lo,type:ty,charges:+ch,notes:no};
+    closeModal('edit-modal');showToast('Appointment updated ✓');renderDash();
+  }catch(e){showToast('Update failed: '+(e.message||'Try again'));}
+  btn.innerHTML='Save changes';btn.disabled=false;
+}
+
+// ── CANCEL ──
+function openCancel(idx){
+  cancellingIdx=idx;
+  const a=appts[idx];
+  document.getElementById('cancel-modal-sub').textContent=`${a.name} on ${fmtDate(a.date)}`;
+  document.getElementById('cancel-modal').classList.add('show');
+}
+async function confirmCancel(){
+  const btn=document.getElementById('cancel-confirm-btn');
+  btn.innerHTML='<span class="spin"></span> Cancelling...';btn.disabled=true;
+  const a=appts[cancellingIdx];
+  try{
+    const row=a.rowIndex;
+    await api(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!J${row}?valueInputOption=RAW`,'PUT',{values:[['Cancelled']]});
+    if(a.calEventId){
+      // Update calendar event title to show cancelled
+      try{
+        const ev=await api(`https://www.googleapis.com/calendar/v3/calendars/primary/events/${a.calEventId}`);
+        await api(`https://www.googleapis.com/calendar/v3/calendars/primary/events/${a.calEventId}`,'PUT',{
+          ...ev,summary:`❌ CANCELLED — ${ev.summary}`,
+          reminders:{useDefault:false,overrides:[]}
+        });
+      }catch(e){/* calendar update optional */}
+    }
+    appts[cancellingIdx]={...a,status:'Cancelled'};
+    closeModal('cancel-modal');showToast('Appointment cancelled');renderDash();
+  }catch(e){showToast('Could not cancel: '+(e.message||'Try again'));}
+  btn.innerHTML='Yes, cancel it';btn.disabled=false;
+}
+
+// ── PAID TOGGLE ON EXISTING ──
+async function togglePaid(idx){
+  const a=appts[idx];
+  const newPaid=!a.paid;
+  try{
+    const row=a.rowIndex;
+    await api(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!I${row}?valueInputOption=RAW`,'PUT',{values:[[newPaid?'Paid':'Unpaid']]});
+    appts[idx]={...a,paid:newPaid};
+    showToast(newPaid?'Marked as paid ✓':'Marked as unpaid');renderDash();
+  }catch(e){showToast('Could not update payment status');}
+}
+
+// ── CLIENT HISTORY ──
+function openClientHistory(name){
+  const clientAppts=appts.filter(a=>a.name.toLowerCase()===name.toLowerCase()&&a.status!=='Cancelled');
+  const total=clientAppts.reduce((s,a)=>s+a.charges,0);
+  document.getElementById('history-modal-title').textContent=name;
+  document.getElementById('history-modal-sub').textContent=`${clientAppts.length} appointment${clientAppts.length!==1?'s':''}  ·  ₹${total.toLocaleString('en-IN')} total`;
+  const sorted=[...clientAppts].sort((a,b)=>new Date(b.date)-new Date(a.date));
+  document.getElementById('history-modal-content').innerHTML=sorted.length?sorted.map(a=>`
+    <div class="client-appt-row">
+      <div class="client-appt-left">${fmtDate(a.date)}<br><span style="font-size:11px">${a.type}</span></div>
+      <div class="client-appt-right">₹${a.charges.toLocaleString('en-IN')}<br><span style="font-size:11px;font-weight:400;color:${a.paid?'var(--green)':'var(--amber)'};">${a.paid?'Paid':'Unpaid'}</span></div>
+    </div>`).join(''):'<p style="font-size:13px;color:var(--muted)">No history yet.</p>';
+  document.getElementById('history-modal').classList.add('show');
 }
 
 // ── LOAD ──
 async function loadAppts(){
   try{
-    const r = await api(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!A2:H1000`);
-    appts = [];
-    if(r.values) r.values.forEach(row=>{
-      if(row[0]&&row[1]) appts.push({name:row[0]||'',date:row[1]||'',time:row[2]||'',location:row[3]||'',type:row[4]||'',charges:+(row[5]||0),notes:row[6]||''});
+    const r=await api(`https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1!A2:K1000`);
+    appts=[];
+    if(r.values)r.values.forEach((row,i)=>{
+      if(row[0]&&row[1])appts.push({
+        name:row[0]||'',date:row[1]||'',time:row[2]||'',location:row[3]||'',
+        type:row[4]||'',charges:+(row[5]||0),notes:row[6]||'',savedAt:row[7]||'',
+        paid:(row[8]||'Paid')==='Paid',status:row[9]||'Active',calEventId:row[10]||'',
+        rowIndex:i+2
+      });
     });
-    renderDash();
-  }catch(e){ console.error(e); }
+  }catch(e){console.error('Load error',e);}
 }
 
 // ── DASHBOARD ──
 const MNS=['January','February','March','April','May','June','July','August','September','October','November','December'];
-
-function changeMonth(d){
-  curMonth+=d;
-  if(curMonth>11){curMonth=0;curYear++;}
-  if(curMonth<0){curMonth=11;curYear--;}
-  renderDash();
-}
+function changeMonth(d){curMonth+=d;if(curMonth>11){curMonth=0;curYear++;}if(curMonth<0){curMonth=11;curYear--;}renderDash();}
 
 function renderDash(){
   document.getElementById('month-label').textContent=`${MNS[curMonth]} ${curYear}`;
-  const mAppts=appts.filter(a=>{
-    if(!a.date)return false;
-    const dd=new Date(a.date+'T00:00:00');
-    return dd.getMonth()===curMonth&&dd.getFullYear()===curYear;
+  const mA=appts.filter(a=>{
+    if(!a.date||a.status==='Cancelled')return false;
+    const d=new Date(a.date+'T00:00:00');
+    return d.getMonth()===curMonth&&d.getFullYear()===curYear;
   });
-  const totalM=mAppts.reduce((s,a)=>s+a.charges,0);
-  const totalY=appts.filter(a=>a.date&&new Date(a.date+'T00:00:00').getFullYear()===curYear).reduce((s,a)=>s+a.charges,0);
-
+  const totalM=mA.reduce((s,a)=>s+a.charges,0);
+  const totalY=appts.filter(a=>a.date&&a.status!=='Cancelled'&&new Date(a.date+'T00:00:00').getFullYear()===curYear).reduce((s,a)=>s+a.charges,0);
   document.getElementById('stat-month').textContent='₹'+totalM.toLocaleString('en-IN');
-  document.getElementById('stat-month-sub').textContent=`${mAppts.length} appointment${mAppts.length!==1?'s':''}`;
+  document.getElementById('stat-month-sub').textContent=`${mA.length} appointment${mA.length!==1?'s':''}`;
   document.getElementById('stat-ytd').textContent='₹'+totalY.toLocaleString('en-IN');
   document.getElementById('stat-ytd-sub').textContent=`${curYear} total`;
 
+  // Unpaid banner
+  const unpaidM=mA.filter(a=>!a.paid);
+  const unpaidTotal=unpaidM.reduce((s,a)=>s+a.charges,0);
+  const ub=document.getElementById('unpaid-banner');
+  if(unpaidM.length){ub.textContent=`⏳ ${unpaidM.length} unpaid this month — ₹${unpaidTotal.toLocaleString('en-IN')} outstanding`;ub.classList.add('show');}
+  else ub.classList.remove('show');
+
   // Breakdown
   const byType={};
-  mAppts.forEach(a=>{byType[a.type]=(byType[a.type]||0)+a.charges;});
+  mA.forEach(a=>{byType[a.type]=(byType[a.type]||0)+a.charges;});
   const maxA=Math.max(...Object.values(byType),1);
   const bd=document.getElementById('breakdown');
-  if(!Object.keys(byType).length){
-    bd.innerHTML='<div style="font-size:13px;color:var(--muted)">No data this month</div>';
-  } else {
-    bd.innerHTML=Object.entries(byType).sort((a,b)=>b[1]-a[1]).map(([type,amt])=>`
-      <div class="brow">
-        <div class="btype">${type}</div>
-        <div class="bbar-wrap"><div class="bbar" style="width:${Math.round(amt/maxA*100)}%"></div></div>
-        <div class="bamt">₹${amt.toLocaleString('en-IN')}</div>
-      </div>`).join('');
-  }
+  if(!Object.keys(byType).length)bd.innerHTML='<div style="font-size:13px;color:var(--muted)">No data this month</div>';
+  else bd.innerHTML=Object.entries(byType).sort((a,b)=>b[1]-a[1]).map(([type,amt])=>`<div class="brow"><div class="btype">${type}</div><div class="bbar-wrap"><div class="bbar" style="width:${Math.round(amt/maxA*100)}%"></div></div><div class="bamt">₹${amt.toLocaleString('en-IN')}</div></div>`).join('');
 
-  // List
+  // List — show all including cancelled
+  const allMonth=appts.filter(a=>{
+    if(!a.date)return false;
+    const d=new Date(a.date+'T00:00:00');
+    return d.getMonth()===curMonth&&d.getFullYear()===curYear;
+  });
   const listEl=document.getElementById('appt-list');
   document.getElementById('list-title').textContent=`${MNS[curMonth].toUpperCase()} APPOINTMENTS`;
-  if(!mAppts.length){
-    listEl.innerHTML=`<div class="empty"><div class="empty-icon">📭</div><p>No appointments in ${MNS[curMonth]}.<br>Add a booking to see it here.</p></div>`;
-    return;
-  }
-  const sorted=[...mAppts].sort((a,b)=>new Date(a.date)-new Date(b.date));
-  listEl.innerHTML=sorted.map(a=>{
-    const dd=new Date(a.date+'T00:00:00');
-    const dateStr=dd.toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'});
-    const timeStr=a.time?fmtTime(a.time):'';
-    return`<div class="appt-card">
-      <div class="appt-top"><div class="appt-name">${a.name}</div><div class="appt-amt">₹${a.charges.toLocaleString('en-IN')}</div></div>
-      <div class="appt-meta">📅 ${dateStr}${timeStr?` &nbsp;🕐 ${timeStr}`:''}<br>📍 ${a.location}</div>
-      <span class="appt-badge">${a.type}</span>
+  if(!allMonth.length){listEl.innerHTML=`<div class="empty"><div class="empty-icon">📭</div><p>No appointments in ${MNS[curMonth]}.</p></div>`;return;}
+  listEl.innerHTML=[...allMonth].sort((a,b)=>new Date(a.date)-new Date(b.date)).map((a,i)=>{
+    const globalIdx=appts.indexOf(a);
+    const cancelled=a.status==='Cancelled';
+    return`<div class="appt-card${cancelled?' cancelled':!a.paid?' unpaid':''}">
+      <div class="appt-top">
+        <div class="appt-name" onclick="${!cancelled?`openClientHistory('${a.name.replace(/'/g,"\\'")}')`:''}">${a.name}</div>
+        <div class="appt-amt">${cancelled?'<span style="color:var(--muted);font-size:13px">Cancelled</span>':`₹${a.charges.toLocaleString('en-IN')}`}</div>
+      </div>
+      <div class="appt-meta">📅 ${fmtDate(a.date)}${a.time?` &nbsp;🕐 ${fmtTime(a.time)}`:''}<br>📍 ${a.location}</div>
+      <div class="appt-badges">
+        <span class="appt-badge">${a.type}</span>
+        ${cancelled?'<span class="appt-badge badge-cancelled">Cancelled</span>':`<span class="appt-badge ${a.paid?'badge-paid':'badge-unpaid'}">${a.paid?'✓ Paid':'⏳ Unpaid'}</span>`}
+      </div>
+      ${!cancelled?`<div class="appt-actions">
+        <button class="appt-action-btn" onclick="openEdit(${globalIdx})">✏️ Edit</button>
+        <button class="appt-action-btn success" onclick="togglePaid(${globalIdx})">${a.paid?'Mark unpaid':'Mark paid'}</button>
+        <button class="appt-action-btn danger" onclick="openCancel(${globalIdx})">✕ Cancel</button>
+      </div>`:''}
     </div>`;
   }).join('');
 }
 
-function fmtTime(v){
-  const [h,m]=v.split(':');
-  const d=new Date();d.setHours(+h,+m);
-  return d.toLocaleTimeString('en-IN',{hour:'numeric',minute:'2-digit',hour12:true});
+// ── SUCCESS ──
+function showSuccessScreen(){
+  document.getElementById('success-affirmation').textContent=rand(SUCCESS_AFFIRMATIONS);
+  if(lastSaved){
+    const dd=new Date(lastSaved.date+'T00:00:00');
+    document.getElementById('success-details').innerHTML=`
+      <div class="success-row"><span class="success-label">Client</span><span class="success-val">${lastSaved.name}</span></div>
+      <div class="success-row"><span class="success-label">Date</span><span class="success-val">${dd.toLocaleDateString('en-IN',{weekday:'long',day:'numeric',month:'long'})}</span></div>
+      <div class="success-row"><span class="success-label">Time</span><span class="success-val">${fmtTime(lastSaved.time)}</span></div>
+      <div class="success-row"><span class="success-label">Type</span><span class="success-val">${lastSaved.type}</span></div>
+      <div class="success-row"><span class="success-label">Charges</span><span class="success-val">₹${lastSaved.charges.toLocaleString('en-IN')}</span></div>
+      <div class="success-row"><span class="success-label">Payment</span><span class="success-val" style="color:${lastSaved.paid?'var(--green)':'var(--amber)'}">${lastSaved.paid?'✓ Paid':'⏳ Unpaid'}</span></div>`;
+  }
+  show('screen-success');
 }
 
-// ── UI HELPERS ──
-function show(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
+// ── ERRORS ──
+function handleSaveError(e){
+  const msg=e.message||'';
+  let title='Something went wrong',detail='',actionLabel='';
+  if(msg.includes('not found')||msg.includes('404')){title='Sheet not found';detail='The connected Google Sheet may have been deleted. Reconnect a sheet to continue.';actionLabel='Reconnect sheet →';errorContext='reconnect';}
+  else if(msg.includes('403')||msg.includes('permission')||msg.includes('insufficient')){title='Permission issue';detail='BookIt lost access. Sign in again to fix this.';actionLabel='Sign in again →';errorContext='reauth';}
+  else if(msg.includes('calendar')||msg.includes('Calendar')){title='Calendar API not enabled';detail='Enable Google Calendar API in your Google Cloud project.';actionLabel='How to fix →';errorContext='calendar';}
+  else if(!navigator.onLine){title='No internet';detail='Check your connection and try again.';actionLabel='Retry';errorContext='retry';}
+  else{title='Save failed';detail='Something unexpected happened. Your data is safe — try again.';actionLabel='Try again';errorContext='retry';}
+  document.getElementById('form-error-title').textContent=title;
+  document.getElementById('form-error-msg').textContent=detail;
+  document.getElementById('form-error-action').textContent=actionLabel;
+  document.getElementById('form-error').classList.add('show');
   window.scrollTo(0,0);
 }
+function handleErrorAction(){
+  if(errorContext==='reconnect')showReconnect();
+  else if(errorContext==='reauth'){localStorage.removeItem('bookit_sheet_id');show('screen-login');}
+  else if(errorContext==='calendar')showToast('Go to console.cloud.google.com → APIs & Services → Library → Enable Google Calendar API');
+  else hideError();
+}
+function hideError(){document.getElementById('form-error').classList.remove('show');errorContext=null;}
 
+// ── MODAL ──
+function closeModal(id){document.getElementById(id).classList.remove('show');}
+document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show');}));
+
+// ── UI HELPERS ──
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0);}
 function switchTab(tab){
   document.getElementById('tab-book').classList.toggle('active',tab==='form');
   document.getElementById('tab-income').classList.toggle('active',tab==='dashboard');
-  show('screen-'+( tab==='dashboard'?'dashboard':'form' ));
-  if(tab==='dashboard') renderDash();
+  if(tab==='form')showForm();else{show('screen-dashboard');renderDash();}
 }
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);}
+function fmtTime(v){const[h,m]=v.split(':');const d=new Date();d.setHours(+h,+m);return d.toLocaleTimeString('en-IN',{hour:'numeric',minute:'2-digit',hour12:true});}
+function fmtDate(v){return new Date(v+'T00:00:00').toLocaleDateString('en-IN',{weekday:'short',day:'numeric',month:'short'});}
 
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg; t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3000);
-}
-
-// ── FETCH WRAPPER ──
 async function api(url,method='GET',body=null){
   const opts={method,headers:{'Authorization':'Bearer '+token,'Content-Type':'application/json'}};
-  if(body) opts.body=JSON.stringify(body);
+  if(body)opts.body=JSON.stringify(body);
   const res=await fetch(url,opts);
-  if(!res.ok){
-    const err=await res.json().catch(()=>({error:{message:res.statusText}}));
-    throw new Error(err.error?.message||res.statusText);
-  }
+  if(!res.ok){const err=await res.json().catch(()=>({error:{message:res.statusText}}));throw new Error(err.error?.message||res.statusText);}
   return method==='DELETE'?{}:res.json();
 }
 </script>
