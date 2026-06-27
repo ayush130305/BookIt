@@ -452,7 +452,7 @@ input[type="time"]::-webkit-calendar-picker-indicator{opacity:.5;cursor:pointer}
 </nav>
 
 <script>
-// ── CONFIG — replace this after Google Cloud setup ──
+// ── CONFIG ──
 const CLIENT_ID = '769663053484-7duueidupqs3l36c70bddrc0av2s52tb.apps.googleusercontent.com';
 const SCOPES = 'https://www.googleapis.com/auth/spreadsheets https://www.googleapis.com/auth/calendar https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/userinfo.profile';
 const COLS = ['Name','Date','Time','Location','Type','Charges (₹)','Notes','Saved At'];
@@ -465,52 +465,65 @@ let appts = [];
 let curMonth = new Date().getMonth();
 let curYear  = new Date().getFullYear();
 let tokenClient = null;
+let gisLoaded = false;
 
-// ── GOOGLE SIGN IN ──
-function loadGIS(silent=false){
+// ── BOOT: load GIS immediately on every page load ──
+// Google remembers consent — if she's signed in before, this resolves
+// invisibly in <1 second and takes her straight into the app.
+(function boot(){
   const s = document.createElement('script');
   s.src = 'https://accounts.google.com/gsi/client';
   s.async = true; s.defer = true;
   s.onload = () => {
+    gisLoaded = true;
     tokenClient = google.accounts.oauth2.initTokenClient({
-      client_id: CLIENT_ID, scope: SCOPES,
-      prompt: silent ? 'none' : '',
-      callback: r => {
-        if(r.error){
-          if(silent){ show('screen-login'); return; }
-          resetLoginBtn(); showToast('Sign-in failed'); return;
-        }
-        token = r.access_token;
-        // Schedule silent refresh before token expires (55 min)
-        setTimeout(() => silentRefresh(), 55 * 60 * 1000);
-        onSignedIn(silent);
-      }
+      client_id: CLIENT_ID,
+      scope: SCOPES,
+      callback: onTokenResponse
     });
-    tokenClient.requestAccessToken();
+    // Always attempt auto sign-in on load.
+    // If she's granted consent before, Google resolves this silently.
+    // If not (first ever visit), nothing happens — she sees the login screen.
+    tokenClient.requestAccessToken({ prompt: '' });
   };
-  s.onerror = () => { if(!silent){ resetLoginBtn(); showToast('Could not load Google sign-in'); } else { show('screen-login'); } };
+  s.onerror = () => { /* GIS failed to load — user stays on login screen */ };
   document.head.appendChild(s);
-}
+})();
 
-function silentRefresh(){
-  if(tokenClient){ tokenClient.requestAccessToken(); }
-  else { loadGIS(true); }
-}
-
-// Auto sign-in on page load if sheet was previously set up
-window.addEventListener('load', () => {
-  if(sheetId){
-    // Had a previous session — try silent re-auth
-    loadGIS(true);
+function onTokenResponse(r){
+  if(r.error){
+    // Not signed in or consent not given yet — show login screen normally
+    resetLoginBtn();
+    show('screen-login');
+    return;
   }
-});
+  token = r.access_token;
+  // Refresh token 5 min before expiry (tokens last 1hr)
+  setTimeout(refreshToken, 55 * 60 * 1000);
+  onSignedIn();
+}
+
+function refreshToken(){
+  // Silent refresh — no prompt, no UI
+  if(tokenClient){
+    tokenClient.requestAccessToken({ prompt: '' });
+  }
+}
 
 function handleLogin(){
   const btn = document.getElementById('login-btn');
   btn.innerHTML = '<span class="spin"></span> Connecting...';
   btn.disabled = true;
-  if(typeof google !== 'undefined' && tokenClient){ tokenClient.requestAccessToken(); }
-  else { loadGIS(false); }
+  if(gisLoaded && tokenClient){
+    // Explicitly ask for consent prompt since user clicked the button
+    tokenClient.requestAccessToken({ prompt: 'select_account' });
+  } else {
+    // GIS still loading — wait briefly and retry
+    setTimeout(() => {
+      if(gisLoaded && tokenClient){ tokenClient.requestAccessToken({ prompt: 'select_account' }); }
+      else { resetLoginBtn(); showToast('Could not connect to Google. Try again.'); }
+    }, 2000);
+  }
 }
 
 function resetLoginBtn(){
@@ -519,14 +532,13 @@ function resetLoginBtn(){
   btn.disabled = false;
 }
 
-async function onSignedIn(silent=false){
+async function onSignedIn(){
   try{
     const u = await api('https://www.googleapis.com/oauth2/v3/userinfo');
     document.getElementById('nav-user').textContent = u.name || u.email || '';
   }catch(e){}
   document.getElementById('top-bar').classList.add('show');
   document.getElementById('bottom-nav').classList.add('show');
-  // If sheet already set up, skip setup screen
   if(sheetId){
     await loadAppts();
     switchTab('form');
